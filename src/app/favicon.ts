@@ -110,7 +110,7 @@ async function generateFavicons() {
         name: "Aying Wangsha - Professional Makeup Artist",
         short_name: "Aying Wangsha",
         description:
-          "Award-winning makeup artist in Bangalore and Mumbai specializing in bridal, editorial, and fashion makeup.",
+          "Professional makeup artist in Bangalore and Mumbai specializing in bridal, editorial, and fashion makeup.",
         start_url: "/",
         display: "standalone",
         background_color: "#030203",

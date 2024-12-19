@@ -21,7 +21,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: "Aying Wangsha | Professional Makeup Artist in Bangalore & Mumbai",
     description:
-      "Award-winning makeup artist in Bangalore and Mumbai specializing in bridal, editorial, and fashion makeup. Expert in Asian beauty, HD techniques, and airbrush makeup for weddings, fashion shows, and special events.",
+      "Professional makeup artist in Bangalore and Mumbai specializing in bridal, editorial, and fashion makeup. Expert in Asian beauty, HD techniques, and airbrush makeup for weddings, fashion shows, and special events.",
     keywords: [
       "makeup artist",
       "professional makeup artist",
@@ -47,7 +47,7 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       title: "Aying Wangsha | Professional Makeup Artist in Bangalore & Mumbai",
       description:
-        "Award-winning makeup artist specializing in bridal, editorial, and fashion makeup. Expert in Asian beauty and HD techniques.",
+        "Professional makeup artist specializing in bridal, editorial, and fashion makeup. Expert in Asian beauty and HD techniques.",
       url: "https://ayingwangsha.com",
       siteName: "Aying Wangsha - Professional Makeup Artist",
       images: [
@@ -65,7 +65,7 @@ export async function generateMetadata(): Promise<Metadata> {
       card: "summary_large_image",
       title: "Aying Wangsha | Professional Makeup Artist",
       description:
-        "Award-winning makeup artist specializing in bridal, editorial, and fashion makeup.",
+        "Professional makeup artist specializing in bridal, editorial, and fashion makeup.",
       images: [ogImage],
     },
     robots: {
@@ -126,7 +126,7 @@ export default function RootLayout({
         className={cn(
           playfair.variable,
           montserrat.variable,
-          "min-h-screen bg-background font-sans antialiased"
+          "min-h-screen bg-background font-sans antialiased",
         )}
       >
         {/* <Header /> */}
@@ -140,7 +140,7 @@ export default function RootLayout({
               name: "Aying Wangsha Makeup Artist",
               image: "https://ayingwangsha.com/og-image.jpg",
               description:
-                "Award-winning makeup artist in Bangalore and Mumbai specializing in bridal, editorial, and fashion makeup. Expert in Asian beauty, HD techniques, and airbrush makeup.",
+                "Professional makeup artist in Bangalore and Mumbai specializing in bridal, editorial, and fashion makeup. Expert in Asian beauty, HD techniques, and airbrush makeup.",
               url: "https://ayingwangsha.com",
               telephone: "+918431786944",
               address: {

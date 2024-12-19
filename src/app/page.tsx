@@ -13,7 +13,7 @@ import {
   PortfolioSection,
   ServicesSection,
   Contact,
-  Testimonials,
+  // Testimonials,
 } from "@/components/sections";
 import type { PortfolioItem } from "@/lib/types";
 
@@ -133,9 +133,9 @@ export default function Home() {
           <Contact />
         </LazyLoad>
 
-        <LazyLoad>
+        {/* <LazyLoad>
           <Testimonials />
-        </LazyLoad>
+        </LazyLoad> */}
 
         <Section>
           <Container>

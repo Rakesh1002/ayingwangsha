@@ -100,9 +100,14 @@ export async function GET() {
                   letterSpacing: "0.2em",
                   textTransform: "uppercase",
                   marginBottom: "24px",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  gap: "8px",
                 }}
               >
-                Award-Winning Makeup Artist
+                <div>Professional Makeup Artist</div>
+                <div>& Beauty Expert</div>
               </div>
               <div
                 style={{
@@ -173,7 +178,7 @@ export async function GET() {
       {
         width: 1200,
         height: 630,
-      }
+      },
     );
   } catch (e) {
     console.error("OG Image Error:", e);
@@ -199,7 +204,7 @@ export async function GET() {
       {
         width: 1200,
         height: 630,
-      }
+      },
     );
   }
 }
