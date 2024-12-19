@@ -1,101 +1,150 @@
-import Image from "next/image";
+import { Section } from "@/components/ui/Section";
+import { Container } from "@/components/ui/Container";
+import { CustomCursor } from "@/components/ui/CustomCursor";
+import { ScrollProgress } from "@/components/ui/ScrollProgress";
+import { Footer } from "@/components/Footer";
+import { BackToTop } from "@/components/ui/BackToTop";
+import { LazyLoad } from "@/components/ui/LazyLoad";
+import { InstagramFeed } from "@/components/ui/InstagramFeed";
+import { S3_KEYS } from "@/lib/constants";
+import {
+  HeroSection,
+  AboutSection,
+  PortfolioSection,
+  ServicesSection,
+  Contact,
+  Testimonials,
+} from "@/components/sections";
+import type { PortfolioItem } from "@/lib/types";
+
+type PortfolioCategory = keyof typeof S3_KEYS.portfolio;
+
+// Helper function to create portfolio items for a category
+function createPortfolioItems(category: PortfolioCategory) {
+  const titles: Record<PortfolioCategory, string[]> = {
+    bridal: [
+      "Classic Bridal",
+      "Modern Bride",
+      "Natural Glow",
+      "Elegant Sophistication",
+      "Romantic Look",
+      "Timeless Beauty",
+      "Soft Glam",
+      "Ethereal Beauty",
+      "Radiant Bride",
+      "Glamorous Bride",
+      "Minimalist Chic",
+      "Bohemian Beauty",
+    ],
+    celebrity: [
+      "Red Carpet Glam",
+      "Star Power",
+      "Spotlight Ready",
+      "Award Show",
+      "Magazine Cover",
+      "Press Event",
+    ],
+    editorial: [
+      "High Fashion",
+      "Avant-Garde",
+      "Fashion Story",
+      "Creative Vision",
+    ],
+    model: [
+      "Portfolio Shot",
+      "Campaign Look",
+      "Fashion Week",
+      "Beauty Editorial",
+      "Commercial Beauty",
+      "Runway Ready",
+      "Studio Session",
+      "Location Shoot",
+      "Natural Light",
+      "Fashion Story",
+      "Beauty Close-up",
+      "Lifestyle Shot",
+      "Catalog Look",
+      "Print Campaign",
+      "Digital Content",
+      "Social Media",
+      "Brand Campaign",
+      "Fashion Editorial",
+      "Beauty Campaign",
+      "Lookbook",
+      "E-commerce",
+      "Fashion Film",
+      "Beauty Series",
+      "Collection Shot",
+    ],
+    runway: [
+      "Fashion Week",
+      "Designer Show",
+      "Catwalk Ready",
+      "Runway Glam",
+      "Show Makeup",
+      "Collection Look",
+      "Backstage Beauty",
+      "Designer Vision",
+      "Show Stopper",
+      "Fashion Statement",
+      "Couture Show",
+      "Fashion Event",
+    ],
+  };
+
+  const images = S3_KEYS.portfolio[category];
+  const categoryTitles = titles[category];
+
+  return images.map((s3Key, index) => ({
+    id: `${category}-${index + 1}`,
+    title: categoryTitles[index] || `${category} ${index + 1}`,
+    category: category.charAt(0).toUpperCase() + category.slice(1),
+    s3Key,
+  }));
+}
+
+// Create portfolio items for all categories
+const portfolioItems: PortfolioItem[] = [
+  ...createPortfolioItems("bridal"),
+  ...createPortfolioItems("celebrity"),
+  ...createPortfolioItems("editorial"),
+  ...createPortfolioItems("model"),
+  ...createPortfolioItems("runway"),
+];
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <>
+      <CustomCursor />
+      <ScrollProgress />
+      <main>
+        <HeroSection />
+        <AboutSection />
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
+        <LazyLoad>
+          <PortfolioSection items={portfolioItems} />
+        </LazyLoad>
+
+        <LazyLoad>
+          <ServicesSection />
+        </LazyLoad>
+
+        <LazyLoad>
+          <Contact />
+        </LazyLoad>
+
+        <LazyLoad>
+          <Testimonials />
+        </LazyLoad>
+
+        <Section>
+          <Container>
+            <InstagramFeed />
+          </Container>
+        </Section>
       </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      <Footer />
+      <BackToTop />
+    </>
   );
 }
