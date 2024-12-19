@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Playfair_Display, Montserrat } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import { Analytics } from "@vercel/analytics/next";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -124,7 +126,7 @@ export default function RootLayout({
         className={cn(
           playfair.variable,
           montserrat.variable,
-          "min-h-screen bg-background font-sans antialiased",
+          "min-h-screen bg-background font-sans antialiased"
         )}
       >
         {/* <Header /> */}
@@ -241,6 +243,8 @@ export default function RootLayout({
           }}
         />
         {children}
+        <Analytics />
+        <GoogleAnalytics gaId="G-XCM5FSJXPH" />
       </body>
     </html>
   );
