@@ -5,12 +5,6 @@ export const runtime = "edge";
 
 export async function GET() {
   try {
-    const playfairDisplay = await fetch(
-      new URL(
-        "https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap",
-      ),
-    ).then((res) => res.arrayBuffer());
-
     // Get a mix of images from different categories
     const portfolioImages = [
       ...S3_KEYS.portfolio.bridal.slice(0, 2),
@@ -31,34 +25,44 @@ export async function GET() {
             justifyContent: "center",
             backgroundColor: "#030203",
             position: "relative",
+            fontFamily: "serif",
           }}
         >
-          {/* Background Grid */}
+          {/* Background Images */}
           <div
             style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(4, 1fr)",
-              gap: "16px",
-              padding: "32px",
+              display: "flex",
+              flexDirection: "row",
+              flexWrap: "wrap",
               position: "absolute",
               top: 0,
               left: 0,
               right: 0,
               bottom: 0,
-              opacity: 0.3,
+              opacity: 0.5,
+              padding: "32px",
             }}
           >
             {portfolioImages.map((s3Key, i) => (
-              <img
+              <div
                 key={i}
-                src={`${process.env.NEXT_PUBLIC_S3_BASE_URL}/${s3Key}`}
-                alt={`Portfolio image ${i + 1}`}
                 style={{
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
+                  width: "25%",
+                  height: "50%",
+                  padding: "8px",
+                  display: "flex",
                 }}
-              />
+              >
+                <img
+                  src={`${process.env.NEXT_PUBLIC_S3_BASE_URL}/${s3Key}`}
+                  alt={`Portfolio image ${i + 1}`}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                  }}
+                />
+              </div>
             ))}
           </div>
 
@@ -77,7 +81,6 @@ export async function GET() {
               alignItems: "center",
               justifyContent: "center",
               padding: "48px",
-              gap: "24px",
             }}
           >
             {/* Title */}
@@ -86,35 +89,50 @@ export async function GET() {
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
-                gap: "8px",
+                textAlign: "center",
+                marginBottom: "48px",
               }}
             >
               <div
                 style={{
                   color: "#E685A5",
-                  fontSize: 24,
-                  fontFamily: "Playfair Display",
+                  fontSize: 32,
                   letterSpacing: "0.2em",
                   textTransform: "uppercase",
+                  marginBottom: "24px",
                 }}
               >
                 Award-Winning Makeup Artist
               </div>
               <div
                 style={{
-                  color: "white",
-                  fontSize: 72,
-                  fontFamily: "Playfair Display",
-                  fontWeight: 700,
-                  lineHeight: 1.1,
-                  textAlign: "center",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  marginBottom: "48px",
                 }}
               >
-                Aying
-                <br />
-                <span style={{ color: "#E685A5", fontStyle: "italic" }}>
+                <div
+                  style={{
+                    color: "white",
+                    fontSize: 96,
+                    fontWeight: 700,
+                    lineHeight: 1,
+                  }}
+                >
+                  Aying
+                </div>
+                <div
+                  style={{
+                    color: "#E685A5",
+                    fontSize: 96,
+                    fontWeight: 700,
+                    lineHeight: 1,
+                    fontStyle: "italic",
+                  }}
+                >
                   Wangsha
-                </span>
+                </div>
               </div>
             </div>
 
@@ -122,11 +140,12 @@ export async function GET() {
             <div
               style={{
                 display: "flex",
-                gap: "24px",
+                alignItems: "center",
+                gap: "16px",
                 color: "white",
-                fontSize: 20,
-                opacity: 0.8,
-                fontFamily: "Playfair Display",
+                fontSize: 28,
+                opacity: 0.9,
+                marginBottom: "32px",
               }}
             >
               <span>Bridal</span>
@@ -142,8 +161,7 @@ export async function GET() {
             <div
               style={{
                 color: "#E685A5",
-                fontSize: 24,
-                fontFamily: "Playfair Display",
+                fontSize: 32,
                 opacity: 0.9,
               }}
             >
@@ -155,17 +173,33 @@ export async function GET() {
       {
         width: 1200,
         height: 630,
-        fonts: [
-          {
-            name: "Playfair Display",
-            data: playfairDisplay,
-            style: "normal",
-          },
-        ],
-      },
+      }
     );
   } catch (e) {
-    console.error(e);
-    return new Response("Failed to generate OG image", { status: 500 });
+    console.error("OG Image Error:", e);
+    return new ImageResponse(
+      (
+        <div
+          style={{
+            height: "100%",
+            width: "100%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            backgroundColor: "#030203",
+            color: "#E685A5",
+            fontSize: 48,
+            fontWeight: 700,
+            fontFamily: "serif",
+          }}
+        >
+          Aying Wangsha - Professional Makeup Artist
+        </div>
+      ),
+      {
+        width: 1200,
+        height: 630,
+      }
+    );
   }
 }
