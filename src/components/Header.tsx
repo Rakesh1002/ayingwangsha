@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import Link from "next/link";
 import Image from "next/image";
 import { Menu } from "lucide-react";
@@ -12,6 +12,7 @@ const navItems = [
   { href: "#about", label: "About" },
   { href: "#portfolio", label: "Portfolio" },
   { href: "#services", label: "Services" },
+  { href: "#faq", label: "FAQ" },
   { href: "#contact", label: "Contact" },
 ];
 

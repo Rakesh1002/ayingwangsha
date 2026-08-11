@@ -2,7 +2,7 @@
 
 import { Section } from "@/components/ui/Section";
 import { Container } from "@/components/ui/Container";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { Quote } from "lucide-react";
 import Image from "next/image";
 

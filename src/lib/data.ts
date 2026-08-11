@@ -7,7 +7,7 @@ export const services: Service[] = [
     description:
       "Look radiant on your special day with personalized bridal makeup services.",
     icon: Sparkles,
-    price: "From ₹29,999",
+    price: "From ₹34,999",
     features: [
       "Consultation and trial session",
       "Day-of makeup application",
@@ -20,7 +20,7 @@ export const services: Service[] = [
     description:
       "Professional makeup for photoshoots, magazines, and creative projects.",
     icon: Camera,
-    price: "From ₹19,999",
+    price: "From ₹24,999",
     features: [
       "Concept development",
       "Multiple looks per session",
@@ -33,7 +33,7 @@ export const services: Service[] = [
     description:
       "Stand out at your next special occasion with professional makeup.",
     icon: Users,
-    price: "From ₹14,999",
+    price: "From ₹19,999",
     features: [
       "Personalized consultation",
       "Long-lasting application",

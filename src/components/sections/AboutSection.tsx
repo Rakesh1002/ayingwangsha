@@ -1,15 +1,14 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
+import Image from "next/image";
 import { Section } from "@/components/ui/Section";
 import { Container } from "@/components/ui/Container";
-import { S3Media } from "@/components/ui/S3Media";
-import { S3_KEYS } from "@/lib/constants";
 
 const stats = [
-  { number: "10+", label: "Years Experience" },
-  { number: "500+", label: "Happy Clients" },
-  { number: "50+", label: "Brand Collaborations" },
+  { number: "12+", label: "Years Experience" },
+  { number: "750+", label: "Happy Clients" },
+  { number: "100+", label: "Brand Collaborations" },
 ];
 
 const expertiseList = [
@@ -139,21 +138,18 @@ export function AboutSection() {
             viewport={{ once: true }}
             whileHover={{ scale: 1.02 }}
             transition={{ duration: 0.3 }}
-            className="relative max-w-md mx-auto w-full aspect-[3/4]"
+            className="relative max-w-md mx-auto w-full aspect-3/4"
           >
             <div className="absolute inset-0 rounded-xl overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/20 to-background/80 z-10" />
-              <S3Media
-                s3Key={S3_KEYS.about}
+              <div className="absolute inset-0 bg-linear-to-t from-background/80 via-background/20 to-background/80 z-10" />
+              <Image
+                src="/about.jpg"
                 alt="Aying Wangsha - Professional Makeup Artist"
                 className="object-cover rounded-xl transition-transform duration-500 hover:scale-110"
                 fill
-                width={600}
-                height={800}
+                sizes="(max-width: 768px) 100vw, 448px"
+                quality={90}
                 priority
-                onError={(error: Error) => {
-                  console.error("Failed to load about image:", error);
-                }}
               />
             </div>
           </motion.div>

@@ -1,7 +1,8 @@
 import { MetadataRoute } from "next";
+import { SITE_URL } from "@/lib/seo";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://ayingwangsha.com";
+  const baseUrl = SITE_URL;
   const lastModified = new Date();
 
   // Main sections
@@ -31,9 +32,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/#testimonials`,
+      url: `${baseUrl}/#faq`,
       lastModified,
-      changeFrequency: "weekly" as const,
+      changeFrequency: "monthly" as const,
       priority: 0.7,
     },
     {

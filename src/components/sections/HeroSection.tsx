@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { S3_KEYS } from "@/lib/constants";
@@ -82,7 +82,7 @@ export function HeroSection() {
 
   return (
     <section className="h-screen relative flex items-center justify-center overflow-hidden">
-      <div className="absolute inset-0 z-0 bg-gradient-to-b from-background/50 to-background flex items-center justify-center">
+      <div className="absolute inset-0 z-0 bg-linear-to-b from-background/50 to-background flex items-center justify-center">
         <motion.video
           key={currentVideo}
           ref={videoRef}
@@ -106,7 +106,7 @@ export function HeroSection() {
         transition={{ delay: 0.5 }}
         className="relative z-10 text-center space-y-6"
       >
-        <div className="space-y-2 backdrop-blur-sm bg-background/10 p-6 rounded-xl">
+        <div className="space-y-2 backdrop-blur-xs bg-background/10 p-6 rounded-xl">
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -125,6 +125,33 @@ export function HeroSection() {
             <br />
             <span className="text-primary font-light italic">Wangsha</span>
           </motion.h1>
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.1 }}
+            className="text-muted-foreground text-sm md:text-base max-w-md mx-auto pt-2"
+          >
+            Bridal, editorial and runway makeup across Bangalore & Mumbai.
+          </motion.p>
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.3 }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-4"
+          >
+            <a
+              href="#contact"
+              className="w-full sm:w-auto px-8 py-3 rounded-full bg-primary text-primary-foreground text-sm uppercase tracking-wider hover:opacity-90 transition-opacity focus:outline-hidden focus:ring-2 focus:ring-primary/50"
+            >
+              Book a session
+            </a>
+            <a
+              href="#portfolio"
+              className="w-full sm:w-auto px-8 py-3 rounded-full border border-border text-sm uppercase tracking-wider hover:bg-muted/50 transition-colors focus:outline-hidden focus:ring-2 focus:ring-primary/50"
+            >
+              View portfolio
+            </a>
+          </motion.div>
         </div>
       </motion.div>
 
@@ -133,14 +160,16 @@ export function HeroSection() {
         <button
           onClick={handlePrevious}
           disabled={isTransitioning}
-          className="p-2 rounded-full bg-background/20 backdrop-blur-sm hover:bg-background/40 transition-colors disabled:opacity-50"
+          aria-label="Previous showreel clip"
+          className="p-2 rounded-full bg-background/20 backdrop-blur-xs hover:bg-background/40 transition-colors disabled:opacity-50 focus:outline-hidden focus:ring-2 focus:ring-primary/50"
         >
           <ChevronLeft size={24} />
         </button>
         <button
           onClick={handleNext}
           disabled={isTransitioning}
-          className="p-2 rounded-full bg-background/20 backdrop-blur-sm hover:bg-background/40 transition-colors disabled:opacity-50"
+          aria-label="Next showreel clip"
+          className="p-2 rounded-full bg-background/20 backdrop-blur-xs hover:bg-background/40 transition-colors disabled:opacity-50 focus:outline-hidden focus:ring-2 focus:ring-primary/50"
         >
           <ChevronRight size={24} />
         </button>

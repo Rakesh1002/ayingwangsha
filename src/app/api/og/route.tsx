@@ -1,7 +1,5 @@
-import { ImageResponse } from "@vercel/og";
+import { ImageResponse } from "next/og";
 import { S3_KEYS } from "@/lib/constants";
-
-export const runtime = "edge";
 
 export async function GET() {
   try {

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 import { ChevronUp } from "lucide-react";
 
 export function BackToTop() {
@@ -38,7 +38,8 @@ export function BackToTop() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 10 }}
           onClick={scrollToTop}
-          className="fixed right-4 bottom-4 p-3 bg-primary text-primary-foreground rounded-full shadow-lg hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-primary/50"
+          aria-label="Back to top"
+          className="fixed right-4 bottom-4 p-3 bg-primary text-primary-foreground rounded-full shadow-lg hover:opacity-90 focus:outline-hidden focus:ring-2 focus:ring-primary/50"
         >
           <ChevronUp size={24} />
         </motion.button>

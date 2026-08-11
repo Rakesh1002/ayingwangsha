@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 export function CustomCursor() {
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -69,7 +69,7 @@ export function CustomCursor() {
     <>
       {/* Main cursor dot - moves instantly with cursor */}
       <motion.div
-        className="fixed w-2.5 h-2.5 bg-primary rounded-full pointer-events-none z-[9999] mix-blend-difference hidden sm:block"
+        className="fixed w-2.5 h-2.5 bg-primary rounded-full pointer-events-none z-9999 mix-blend-difference hidden sm:block"
         style={{
           x: position.x - 5,
           y: position.y - 5,
@@ -78,7 +78,7 @@ export function CustomCursor() {
       />
       {/* Trailing circle */}
       <motion.div
-        className="fixed w-6 h-6 border border-primary rounded-full pointer-events-none z-[9998] mix-blend-difference hidden sm:block"
+        className="fixed w-6 h-6 border border-primary rounded-full pointer-events-none z-9998 mix-blend-difference hidden sm:block"
         animate={{
           x: position.x - 12,
           y: position.y - 12,

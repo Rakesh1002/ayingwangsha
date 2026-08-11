@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 import { Section } from "@/components/ui/Section";
 import { Container } from "@/components/ui/Container";
 import { S3Media } from "@/components/ui/S3Media";
@@ -146,14 +146,14 @@ export default function Portfolio({ items }: PortfolioProps) {
                 className="group cursor-pointer"
                 onClick={() => handleItemClick(item)}
               >
-                <div className="relative aspect-[3/4] overflow-hidden rounded-xl bg-muted">
+                <div className="relative aspect-3/4 overflow-hidden rounded-xl bg-muted">
                   <S3Media
                     s3Key={item.s3Key}
                     alt={item.title}
                     className="object-cover transition-transform duration-500 group-hover:scale-110"
                     priority
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="absolute inset-0 bg-linear-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <div className="absolute bottom-0 left-0 right-0 p-6">
                       <p className="text-sm text-primary font-medium">
                         {item.category}
@@ -177,7 +177,7 @@ export default function Portfolio({ items }: PortfolioProps) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[60] bg-background/90 flex flex-col"
+            className="fixed inset-0 z-60 bg-background/90 flex flex-col"
             onKeyDown={handleKeyDown}
             tabIndex={0}
           >
@@ -195,6 +195,7 @@ export default function Portfolio({ items }: PortfolioProps) {
               <div className="flex items-center gap-2">
                 <button
                   onClick={togglePlayback}
+                  aria-label={isPlaying ? "Pause slideshow" : "Play slideshow"}
                   className="text-foreground hover:text-primary p-2 rounded-full hover:bg-muted/50 transition-colors"
                 >
                   {isPlaying ? <Pause size={24} /> : <Play size={24} />}
@@ -204,6 +205,7 @@ export default function Portfolio({ items }: PortfolioProps) {
                     setSelectedImage(null);
                     setIsPlaying(false);
                   }}
+                  aria-label="Close gallery"
                   className="text-foreground hover:text-primary p-2 rounded-full hover:bg-muted/50 transition-colors"
                 >
                   <X size={24} />
@@ -215,6 +217,7 @@ export default function Portfolio({ items }: PortfolioProps) {
             <div className="flex-1 flex items-center justify-center relative px-12 mb-[80px] sm:mb-[70px]">
               <button
                 onClick={handlePrevious}
+                aria-label="Previous image"
                 className="absolute left-4 text-foreground hover:text-primary z-20 p-2 hover:bg-muted/50 rounded-full transition-colors"
               >
                 <ChevronLeft size={32} />
@@ -236,6 +239,7 @@ export default function Portfolio({ items }: PortfolioProps) {
 
               <button
                 onClick={handleNext}
+                aria-label="Next image"
                 className="absolute right-4 text-foreground hover:text-primary z-20 p-2 hover:bg-muted/50 rounded-full transition-colors"
               >
                 <ChevronRight size={32} />
@@ -243,7 +247,7 @@ export default function Portfolio({ items }: PortfolioProps) {
             </div>
 
             {/* Thumbnails */}
-            <div className="h-[100px] sm:h-[120px] p-2 bg-background/50 backdrop-blur-sm fixed bottom-0 left-0 right-0">
+            <div className="h-[100px] sm:h-[120px] p-2 bg-background/50 backdrop-blur-xs fixed bottom-0 left-0 right-0">
               <div className="flex gap-2 justify-start h-full overflow-x-auto overflow-y-hidden px-4 sm:px-8 no-scrollbar">
                 {filteredItems.map((item, index) => (
                   <button
@@ -253,7 +257,7 @@ export default function Portfolio({ items }: PortfolioProps) {
                       setCurrentIndex(index);
                       setIsPlaying(false);
                     }}
-                    className={`relative h-full aspect-[3/4] rounded-md overflow-hidden transition-all flex-shrink-0
+                    className={`relative h-full aspect-3/4 rounded-md overflow-hidden transition-all shrink-0
                       ${currentIndex === index ? "ring-2 ring-primary scale-105" : "opacity-50 hover:opacity-100"}`}
                   >
                     <S3Media

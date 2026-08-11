@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import { Playfair_Display, Montserrat } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
-import { Analytics } from "@vercel/analytics/next";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import Header from "@/components/Header";
+import { buildJsonLd } from "@/lib/seo";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -19,25 +20,31 @@ export async function generateMetadata(): Promise<Metadata> {
   const ogImage = "https://ayingwangsha.com/api/og";
 
   return {
-    title: "Aying Wangsha | Professional Makeup Artist in Bangalore & Mumbai",
+    title:
+      "Aying Wangsha | Makeup & Hair Artist in Bangalore, Karnataka — Bridal, Editorial, Film & TV",
     description:
-      "Professional makeup artist in Bangalore and Mumbai specializing in bridal, editorial, and fashion makeup. Expert in Asian beauty, HD techniques, and airbrush makeup for weddings, fashion shows, and special events.",
+      "Professional makeup and hair artist based in Bangalore, serving Karnataka and Mumbai. Bridal and wedding makeup, fashion and editorial photoshoots, runway, and makeup and hair for movies, TV series and ad films. HD and airbrush techniques, Asian beauty specialist. Bridal from ₹34,999.",
     keywords: [
-      "makeup artist",
-      "professional makeup artist",
-      "bridal makeup",
-      "wedding makeup artist",
-      "editorial makeup",
-      "fashion makeup",
+      "makeup artist Karnataka",
+      "makeup and hair artist Bangalore",
+      "bridal makeup artist Bangalore",
+      "wedding makeup artist Karnataka",
+      "hair stylist Bangalore",
+      "editorial makeup artist",
+      "fashion photoshoot makeup artist",
+      "film makeup artist Karnataka",
+      "TV series makeup artist",
+      "movie makeup and hair artist India",
+      "ad film makeup artist Bangalore",
+      "runway makeup artist",
+      "Mysore makeup artist",
+      "Mangalore makeup artist",
+      "Coorg destination wedding makeup",
       "Asian makeup artist",
       "HD makeup",
       "airbrush makeup",
-      "Bangalore makeup artist",
       "Mumbai makeup artist",
-      "Indian bridal makeup",
       "celebrity makeup artist",
-      "fashion show makeup",
-      "special event makeup",
       "Aying Wangsha",
     ],
     metadataBase: new URL("https://ayingwangsha.com"),
@@ -45,9 +52,10 @@ export async function generateMetadata(): Promise<Metadata> {
       canonical: "/",
     },
     openGraph: {
-      title: "Aying Wangsha | Professional Makeup Artist in Bangalore & Mumbai",
+      title:
+        "Aying Wangsha | Makeup & Hair Artist in Bangalore, Karnataka — Bridal, Editorial, Film & TV",
       description:
-        "Professional makeup artist specializing in bridal, editorial, and fashion makeup. Expert in Asian beauty and HD techniques.",
+        "Makeup and hair for brides, fashion and editorial photoshoots, runway, and film and TV productions across Karnataka and Mumbai.",
       url: "https://ayingwangsha.com",
       siteName: "Aying Wangsha - Professional Makeup Artist",
       images: [
@@ -63,9 +71,9 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     twitter: {
       card: "summary_large_image",
-      title: "Aying Wangsha | Professional Makeup Artist",
+      title: "Aying Wangsha | Makeup & Hair Artist, Bangalore",
       description:
-        "Professional makeup artist specializing in bridal, editorial, and fashion makeup.",
+        "Bridal, editorial, runway, and film and TV makeup and hair across Karnataka and Mumbai.",
       images: [ogImage],
     },
     robots: {
@@ -92,7 +100,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark scroll-smooth" suppressHydrationWarning>
+    <html
+      lang="en"
+      className={cn(playfair.variable, montserrat.variable, "dark scroll-smooth")}
+      suppressHydrationWarning
+    >
       <head>
         <link rel="icon" href="/favicon.ico" sizes="48x48" />
         <link
@@ -116,134 +128,14 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#E685A5" />
-        <link
-          rel="alternate"
-          type="application/json+oembed"
-          href="https://ayingwangsha.com/api/oembed"
-        />
       </head>
-      <body
-        className={cn(
-          playfair.variable,
-          montserrat.variable,
-          "min-h-screen bg-background font-sans antialiased",
-        )}
-      >
-        {/* <Header /> */}
+      <body className="min-h-screen bg-background font-sans antialiased">
+        <Header />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "LocalBusiness",
-              "@id": "https://ayingwangsha.com",
-              name: "Aying Wangsha Makeup Artist",
-              image: "https://ayingwangsha.com/og-image.jpg",
-              description:
-                "Professional makeup artist in Bangalore and Mumbai specializing in bridal, editorial, and fashion makeup. Expert in Asian beauty, HD techniques, and airbrush makeup.",
-              url: "https://ayingwangsha.com",
-              telephone: "+918431786944",
-              address: {
-                "@type": "PostalAddress",
-                streetAddress: "Indiranagar, Bangalore",
-                addressLocality: "Bangalore",
-                addressRegion: "Karnataka",
-                postalCode: "560038",
-                addressCountry: "IN",
-              },
-              openingHoursSpecification: {
-                "@type": "OpeningHoursSpecification",
-                dayOfWeek: [
-                  "Monday",
-                  "Tuesday",
-                  "Wednesday",
-                  "Thursday",
-                  "Friday",
-                  "Saturday",
-                  "Sunday",
-                ],
-                opens: "09:00",
-                closes: "18:00",
-              },
-              sameAs: [
-                "https://instagram.com/makeupandhairbyaying",
-                "https://facebook.com/ayingwangsha",
-              ],
-              priceRange: "₹₹₹",
-              areaServed: [
-                "Bangalore",
-                "Karnataka",
-                "Mumbai",
-                "Maharashtra",
-                "India",
-              ],
-              hasOfferCatalog: {
-                "@type": "OfferCatalog",
-                name: "Makeup Services",
-                itemListElement: [
-                  {
-                    "@type": "Offer",
-                    itemOffered: {
-                      "@type": "Service",
-                      name: "Bridal Makeup",
-                      description:
-                        "Complete bridal makeup package with trials and HD airbrush techniques",
-                    },
-                    priceSpecification: {
-                      "@type": "PriceSpecification",
-                      priceCurrency: "INR",
-                      price: "29999.00",
-                    },
-                  },
-                  {
-                    "@type": "Offer",
-                    itemOffered: {
-                      "@type": "Service",
-                      name: "Editorial Makeup",
-                      description:
-                        "Professional makeup for photoshoots, fashion shows, and editorial work",
-                    },
-                    priceSpecification: {
-                      "@type": "PriceSpecification",
-                      priceCurrency: "INR",
-                      price: "19999.00",
-                    },
-                  },
-                  {
-                    "@type": "Offer",
-                    itemOffered: {
-                      "@type": "Service",
-                      name: "Special Events Makeup",
-                      description:
-                        "Makeup services for special occasions and events",
-                    },
-                    priceSpecification: {
-                      "@type": "PriceSpecification",
-                      priceCurrency: "INR",
-                      price: "14999.00",
-                    },
-                  },
-                ],
-              },
-              review: {
-                "@type": "Review",
-                reviewRating: {
-                  "@type": "Rating",
-                  ratingValue: "5",
-                  bestRating: "5",
-                },
-                author: {
-                  "@type": "Person",
-                  name: "Shenshen Wangsha",
-                },
-                reviewBody:
-                  "Aying made my wedding day absolutely perfect! Her attention to detail and ability to enhance my natural features while keeping me looking like myself was incredible.",
-              },
-            }),
-          }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(buildJsonLd()) }}
         />
         {children}
-        <Analytics />
         <GoogleAnalytics gaId="G-XCM5FSJXPH" />
       </body>
     </html>

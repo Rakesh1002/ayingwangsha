@@ -1,0 +1,28 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "ayingwangsha",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2026-06-01",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  // Kept enabled as a fallback URL: without it, a failed custom-domain attach
+  // leaves the Worker with no reachable hostname at all.
+  "workers_dev": true,
+  "routes": [
+    { "pattern": "ayingwangsha.com", "custom_domain": true },
+    { "pattern": "www.ayingwangsha.com", "custom_domain": true }
+  ],
+  "images": {
+    "binding": "IMAGES"
+  },
+  "vars": {
+    "NEXT_PUBLIC_S3_BASE_URL": "https://unquest.s3.amazonaws.com/aying",
+    "WHATSAPP_ADMIN_NUMBER": "918431786944"
+  },
+  "observability": {
+    "enabled": true
+  }
+}

@@ -6,6 +6,7 @@ import { Footer } from "@/components/Footer";
 import { BackToTop } from "@/components/ui/BackToTop";
 import { LazyLoad } from "@/components/ui/LazyLoad";
 import { InstagramFeed } from "@/components/ui/InstagramFeed";
+import { FAQ } from "@/components/sections/FAQ";
 import { S3_KEYS } from "@/lib/constants";
 import {
   HeroSection,
@@ -127,6 +128,10 @@ export default function Home() {
 
         <LazyLoad>
           <ServicesSection />
+        </LazyLoad>
+
+        <LazyLoad>
+          <FAQ />
         </LazyLoad>
 
         <LazyLoad>

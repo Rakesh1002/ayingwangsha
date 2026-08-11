@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { S3Media } from "./S3Media";
 import type { PortfolioItem } from "@/lib/types";
 
@@ -38,13 +38,13 @@ export function PortfolioGrid({ items, onItemClick }: PortfolioGridProps) {
           className="group cursor-pointer"
           onClick={() => onItemClick(portfolioItem)}
         >
-          <div className="relative aspect-[3/4] bg-muted overflow-hidden">
+          <div className="relative aspect-3/4 bg-muted overflow-hidden">
             <S3Media
               s3Key={portfolioItem.s3Key}
               alt={portfolioItem.title}
               className="object-cover transition-transform duration-300 group-hover:scale-105"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <div className="absolute inset-0 bg-linear-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
               <div className="absolute bottom-0 left-0 right-0 p-4">
                 <p className="text-sm text-primary font-medium">
                   {portfolioItem.category}

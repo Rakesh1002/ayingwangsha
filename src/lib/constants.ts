@@ -1,6 +1,4 @@
 export const S3_KEYS = {
-  hero: "aying_site_jpg/hero-bg.jpg",
-  about: "aying_site_jpg/self_3.jpeg",
   portfolio: {
     bridal: [
       "aying_site_jpg/bridal_1.jpg",

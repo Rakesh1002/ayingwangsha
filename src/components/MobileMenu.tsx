@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 import Link from "next/link";
 import { X } from "lucide-react";
 
@@ -19,14 +19,14 @@ export function MobileMenu({ isOpen, onClose, navItems }: MobileMenuProps) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[100]"
+            className="fixed inset-0 bg-black/50 backdrop-blur-xs z-100"
             onClick={onClose}
           />
           <motion.div
             initial={{ x: "100%" }}
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
-            className="fixed right-0 top-0 bottom-0 w-3/4 max-w-sm bg-background border-l border-border z-[100] p-6 shadow-xl"
+            className="fixed right-0 top-0 bottom-0 w-3/4 max-w-sm bg-background border-l border-border z-100 p-6 shadow-xl"
           >
             <button
               onClick={onClose}
