@@ -18,6 +18,22 @@
   "images": {
     "binding": "IMAGES"
   },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "ayingwangsha-enquiries",
+      "database_id": "3c88f17f-3df4-4093-836a-0fdf922de761"
+    }
+  ],
+  // Native binding rather than a hand-rolled KV counter. Counters are cached on
+  // the machine the Worker runs on; period must be 10 or 60.
+  "ratelimits": [
+    {
+      "name": "CONTACT_RATE_LIMIT",
+      "namespace_id": "1001",
+      "simple": { "limit": 5, "period": 60 }
+    }
+  ],
   "vars": {
     "NEXT_PUBLIC_S3_BASE_URL": "https://unquest.s3.amazonaws.com/aying",
     "WHATSAPP_ADMIN_NUMBER": "918431786944"
