@@ -30,11 +30,31 @@ export function S3Media({
 }: S3MediaProps) {
   const { url, isLoading, error } = useS3Media(s3Key);
   const [isImageLoading, setIsImageLoading] = useState(true);
+  const [hasLoadError, setHasLoadError] = useState(false);
+
+  // Sibling of the loading skeleton: same muted fill, dashed edge so it reads
+  // as absent rather than still loading.
+  const fallback = (
+    <div
+      className={cn(
+        "bg-muted border border-dashed border-border/60 rounded-md flex items-center justify-center",
+        className,
+        fill ? "w-full h-full" : "",
+      )}
+      style={!fill ? { width, height } : undefined}
+      role="img"
+      aria-label={alt ? `${alt} (image unavailable)` : "Image unavailable"}
+    >
+      <span className="text-muted-foreground text-xs px-2 text-center">
+        Image unavailable
+      </span>
+    </div>
+  );
 
   if (error) {
     console.error("S3Media error:", error);
     onError?.(error);
-    return null;
+    return fallback;
   }
 
   if (isLoading || !s3Key) {
@@ -46,7 +66,7 @@ export function S3Media({
     );
   }
 
-  if (!url) return null;
+  if (!url || hasLoadError) return fallback;
 
   // Handle video files
   if (s3Key.endsWith(".mp4") || s3Key.endsWith(".webm")) {
@@ -59,6 +79,10 @@ export function S3Media({
         loop
         playsInline
         onLoadedData={onLoad}
+        onError={() => {
+          setHasLoadError(true);
+          onError?.(new Error(`Video failed to load: ${s3Key}`));
+        }}
       />
     );
   }
@@ -83,6 +107,11 @@ export function S3Media({
         onLoad={() => {
           setIsImageLoading(false);
           onLoad?.();
+        }}
+        onError={() => {
+          setIsImageLoading(false);
+          setHasLoadError(true);
+          onError?.(new Error(`Image failed to load: ${s3Key}`));
         }}
       />
       {isImageLoading && (
