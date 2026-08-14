@@ -1,15 +1,40 @@
 import { ImageResponse } from "next/og";
 import { S3_KEYS } from "@/lib/constants";
 
+/**
+ * satori throws if a referenced image cannot be fetched, which turns the whole
+ * card into a 500 and leaves shared links with no preview at all. Probe one
+ * image first and drop the collage rather than lose the card.
+ */
+async function collageIsReachable(url: string): Promise<boolean> {
+  try {
+    const res = await fetch(url, {
+      method: "GET",
+      headers: { Range: "bytes=0-0" },
+      signal: AbortSignal.timeout(3000),
+    });
+    return res.ok || res.status === 206;
+  } catch {
+    return false;
+  }
+}
+
 export async function GET() {
   try {
     // Get a mix of images from different categories
-    const portfolioImages = [
+    const candidates = [
       ...S3_KEYS.portfolio.bridal.slice(0, 2),
       ...S3_KEYS.portfolio.celebrity.slice(0, 2),
       ...S3_KEYS.portfolio.editorial.slice(0, 2),
       ...S3_KEYS.portfolio.model.slice(0, 2),
     ];
+
+    const base = process.env.NEXT_PUBLIC_S3_BASE_URL;
+    const portfolioImages = (await collageIsReachable(
+      `${base}/${candidates[0]}`,
+    ))
+      ? candidates
+      : [];
 
     return new ImageResponse(
       (

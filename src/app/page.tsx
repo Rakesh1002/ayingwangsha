@@ -4,7 +4,6 @@ import { CustomCursor } from "@/components/ui/CustomCursor";
 import { ScrollProgress } from "@/components/ui/ScrollProgress";
 import { Footer } from "@/components/Footer";
 import { BackToTop } from "@/components/ui/BackToTop";
-import { LazyLoad } from "@/components/ui/LazyLoad";
 import { InstagramFeed } from "@/components/ui/InstagramFeed";
 import { FAQ } from "@/components/sections/FAQ";
 import { S3_KEYS } from "@/lib/constants";
@@ -14,7 +13,7 @@ import {
   PortfolioSection,
   ServicesSection,
   Contact,
-  // Testimonials,
+  Testimonials,
 } from "@/components/sections";
 import type { PortfolioItem } from "@/lib/types";
 
@@ -121,26 +120,11 @@ export default function Home() {
       <main>
         <HeroSection />
         <AboutSection />
-
-        <LazyLoad>
-          <PortfolioSection items={portfolioItems} />
-        </LazyLoad>
-
-        <LazyLoad>
-          <ServicesSection />
-        </LazyLoad>
-
-        <LazyLoad>
-          <FAQ />
-        </LazyLoad>
-
-        <LazyLoad>
-          <Contact />
-        </LazyLoad>
-
-        {/* <LazyLoad>
-          <Testimonials />
-        </LazyLoad> */}
+        <PortfolioSection items={portfolioItems} />
+        <ServicesSection />
+        <Testimonials />
+        <FAQ />
+        <Contact />
 
         <Section>
           <Container>

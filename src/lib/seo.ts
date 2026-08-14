@@ -13,31 +13,44 @@ export const SERVICE_AREAS = [
   "India",
 ] as const;
 
+/**
+ * Single source for pricing. These numbers previously lived in three places
+ * (service cards, Offer schema, FAQ prose) and drifted: search results
+ * advertised 29,999 while the site showed 34,999.
+ */
+export const PRICES = {
+  bridal: 34999,
+  editorial: 24999,
+  events: 19999,
+} as const;
+
+export const inr = (n: number) => `\u20b9${n.toLocaleString("en-IN")}`;
+
 export const SERVICE_CATALOG = [
   {
     name: "Bridal Makeup & Hair",
     description:
       "Complete bridal makeup and hair with consultation, trial session, day-of application, touch-up kit and optional bridal party services. HD and airbrush techniques.",
-    price: "34999.00",
+    price: `${PRICES.bridal}.00`,
   },
   {
     name: "Editorial & Fashion Photoshoot Makeup & Hair",
     description:
       "Makeup and hair for editorial, lookbook, campaign and runway shoots. Concept development, multiple looks per session, high-definition makeup and on-location work.",
-    price: "24999.00",
+    price: `${PRICES.editorial}.00`,
   },
   {
     name: "Special Events Makeup & Hair",
     description:
       "Makeup and hair for receptions, parties and special occasions, with long-lasting application and false lash work.",
-    price: "19999.00",
+    price: `${PRICES.events}.00`,
   },
   {
     name: "Film & TV Series Makeup and Hair",
     description:
       "Makeup and hair for feature films, television series, ad films and music videos, including continuity across shoot days and HD-safe camera-ready looks. Quoted per project.",
   },
-] as const;
+];
 
 /**
  * Rendered verbatim by the FAQ section and emitted as FAQPage schema.
@@ -55,7 +68,7 @@ export const FAQS = [
   },
   {
     q: "Do you take fashion and editorial photoshoots?",
-    a: "Yes. I work with photographers, designers, brands and magazines on editorial, lookbook, campaign and runway shoots. Editorial bookings start from ₹24,999 and include concept development, multiple looks per session, high-definition makeup and on-location work.",
+    a: `Yes. I work with photographers, designers, brands and magazines on editorial, lookbook, campaign and runway shoots. Editorial bookings start from ${inr(PRICES.editorial)} and include concept development, multiple looks per session, high-definition makeup and on-location work.`,
   },
   {
     q: "Do you work on movies and TV series?",
@@ -63,7 +76,7 @@ export const FAQS = [
   },
   {
     q: "How much does bridal makeup cost?",
-    a: "Bridal packages start from ₹34,999 and include a consultation and trial session, day-of makeup application, a touch-up kit, and optional services for the bridal party. Special events start from ₹19,999. Final pricing depends on the number of looks, location and travel.",
+    a: `Bridal packages start from ${inr(PRICES.bridal)} and include a consultation and trial session, day-of makeup application, a touch-up kit, and optional services for the bridal party. Special events start from ${inr(PRICES.events)}. Final pricing depends on the number of looks, location and travel.`,
   },
   {
     q: "How far in advance should I book?",

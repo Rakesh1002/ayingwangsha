@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { useS3Media } from "@/lib/hooks/useS3Media";
 import { cn } from "@/lib/utils";
 
 interface S3MediaProps {
@@ -28,7 +27,10 @@ export function S3Media({
   fill = true,
   onError,
 }: S3MediaProps) {
-  const { url, isLoading, error } = useS3Media(s3Key);
+  // The base URL is inlined at build time, so the URL is known synchronously.
+  // This previously round-tripped to /api/media for every image, which cost one
+  // request per portfolio tile to learn a string the client already had.
+  const url = s3Key ? `${process.env.NEXT_PUBLIC_S3_BASE_URL}/${s3Key}` : null;
   const [isImageLoading, setIsImageLoading] = useState(true);
   const [hasLoadError, setHasLoadError] = useState(false);
 
@@ -50,21 +52,6 @@ export function S3Media({
       </span>
     </div>
   );
-
-  if (error) {
-    console.error("S3Media error:", error);
-    onError?.(error);
-    return fallback;
-  }
-
-  if (isLoading || !s3Key) {
-    return (
-      <div
-        className={cn("bg-muted animate-pulse rounded-md", className)}
-        style={{ width, height }}
-      />
-    );
-  }
 
   if (!url || hasLoadError) return fallback;
 

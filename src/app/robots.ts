@@ -33,7 +33,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "Googlebot-Image",
         allow: ["/", "/api/og", "/about.jpg", "/testimonials/"],
-        disallow: ["/api/contact", "/api/media"],
+        disallow: ["/api/contact"],
       },
       ...aiAgents.map((userAgent) => ({ userAgent, allow, disallow })),
     ],

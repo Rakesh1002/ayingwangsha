@@ -1,4 +1,5 @@
 import { Sparkles, Camera, Users } from "lucide-react";
+import { PRICES, inr } from "@/lib/seo";
 import type { Service } from "@/lib/types";
 
 export const services: Service[] = [
@@ -7,7 +8,7 @@ export const services: Service[] = [
     description:
       "Look radiant on your special day with personalized bridal makeup services.",
     icon: Sparkles,
-    price: "From ₹34,999",
+    price: `From ${inr(PRICES.bridal)}`,
     features: [
       "Consultation and trial session",
       "Day-of makeup application",
@@ -20,7 +21,7 @@ export const services: Service[] = [
     description:
       "Professional makeup for photoshoots, magazines, and creative projects.",
     icon: Camera,
-    price: "From ₹24,999",
+    price: `From ${inr(PRICES.editorial)}`,
     features: [
       "Concept development",
       "Multiple looks per session",
@@ -33,7 +34,7 @@ export const services: Service[] = [
     description:
       "Stand out at your next special occasion with professional makeup.",
     icon: Users,
-    price: "From ₹19,999",
+    price: `From ${inr(PRICES.events)}`,
     features: [
       "Personalized consultation",
       "Long-lasting application",

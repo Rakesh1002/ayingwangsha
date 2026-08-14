@@ -7,19 +7,19 @@ import { services } from "@/lib/data";
 
 const container = {
   hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.2,
-    },
-  },
+  show: { opacity: 1, transition: { staggerChildren: 0.12 } },
 };
 
 const item = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 16 },
   show: { opacity: 1, y: 0 },
 };
 
+/**
+ * Reads as a service menu, not a feature grid. Three symmetric bordered cards
+ * with an icon in a glowing circle is the most recognisable AI-generated
+ * layout there is, and a price list is the right convention for this trade.
+ */
 export function ServicesSection() {
   return (
     <Section id="services">
@@ -33,56 +33,60 @@ export function ServicesSection() {
           >
             <h2 className="font-display text-4xl md:text-5xl">Services</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Professional makeup services tailored to your needs
+              Makeup and hair together, for weddings, shoots and productions
+              across Karnataka.
             </p>
           </motion.div>
+
           <motion.div
             variants={container}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
-            className="grid md:grid-cols-3 gap-8"
+            className="max-w-3xl mx-auto divide-y divide-border border-y border-border"
           >
             {services.map((service) => (
               <motion.div
                 key={service.title}
                 variants={item}
-                whileHover={{ y: -5 }}
-                className="group bg-card p-6 rounded-xl border border-border space-y-4 transition-colors duration-300 hover:bg-muted/50"
+                className="group py-8 grid md:grid-cols-[1fr_auto] gap-x-8 gap-y-3 items-baseline"
               >
-                <div className="relative">
-                  <service.icon className="w-8 h-8 text-primary transition-transform duration-300 group-hover:scale-110" />
-                  <div className="absolute -inset-1 bg-primary/10 rounded-lg scale-0 group-hover:scale-100 transition-transform duration-300" />
+                <div className="space-y-3">
+                  <div className="flex items-center gap-3">
+                    <service.icon
+                      className="w-5 h-5 text-primary shrink-0"
+                      aria-hidden="true"
+                    />
+                    <h3 className="font-display text-2xl">{service.title}</h3>
+                  </div>
+                  <p className="text-muted-foreground leading-relaxed">
+                    {service.description}
+                  </p>
+                  <ul className="text-sm text-muted-foreground/80 flex flex-wrap gap-x-5 gap-y-1.5 pt-1">
+                    {service.features.map((feature) => (
+                      <li key={feature} className="whitespace-nowrap">
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <h3 className="font-display text-xl relative">
-                  {service.title}
-                  <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
-                </h3>
-                <p className="text-muted-foreground group-hover:text-foreground transition-colors duration-300">
-                  {service.description}
-                </p>
-                <p className="font-medium text-lg text-primary">
+                <p className="font-display text-2xl text-primary md:text-right whitespace-nowrap">
                   {service.price}
                 </p>
-                <ul className="space-y-2">
-                  {service.features.map((feature) => (
-                    <motion.li
-                      key={feature}
-                      className="flex items-center text-muted-foreground group-hover:text-foreground transition-colors duration-300"
-                      initial={{ opacity: 0, x: -10 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                    >
-                      <span className="mr-2 text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        •
-                      </span>
-                      {feature}
-                    </motion.li>
-                  ))}
-                </ul>
               </motion.div>
             ))}
           </motion.div>
+
+          <p className="text-center text-sm text-muted-foreground">
+            Film and television projects are quoted per production.{" "}
+            <a
+              href="#contact"
+              className="text-primary underline underline-offset-4"
+            >
+              Get in touch
+            </a>{" "}
+            with your dates.
+          </p>
         </div>
       </Container>
     </Section>
